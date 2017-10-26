@@ -1,0 +1,26 @@
+TARGET = hue_status
+INCDIR = /home/kmc/dependencies/include
+LIBDIR = /home/kmc/dependencies/lib/Poco
+LIBS = -lPocoJSON -lPocoFoundation -lPocoNet
+CC = g++
+CFLAGS = -g -Wall
+
+.PHONY: default all clean
+
+default: $(TARGET)
+all: default
+
+OBJECTS = $(patsubst %.cc, %.o, $(wildcard *.cc))
+HEADERS = $(wildcard *.h)
+
+%.o: %.cc $(HEADERS)
+	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
+
+.PRECIOUS: $(TARGET) $(OBJECTS)
+
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) -Wall -I$(INCDIR) -L$(LIBDIR) $(LIBS) -o $@
+
+clean:
+	-rm -f *.o
+	-rm -f $(TARGET)	

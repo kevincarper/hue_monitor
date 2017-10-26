@@ -1,0 +1,6 @@
+{
+    "ipaddr"    : "localhost",
+    "port"      : 80,
+    "user"      : "newdeveloper",
+    "sleeptime" : 1
+}
